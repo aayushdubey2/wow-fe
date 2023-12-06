@@ -1,22 +1,24 @@
 <template>
-    <NavbarComponent/>
+    <NavbarComponent class="fixed top-0 left-0 right-0 z-10 h-15"/>
     <div>
-      <h1 class="text-3xl font-semibold mb-4">Available Cars</h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- <h1 class="text-3xl font-semibold mb-4">Available Cars</h1> -->
+      <div class="text-left m-5 mt-20 font-bold">
+          You are just one click away from your dream vaccation! Click on any card to rent that car!
+        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mb-10">
         <!-- Loop through the list of cars and display each as a card -->
-        <router-link to="cardetails" v-ripple v-for="(car, index) in cars" :key="index">
-          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+        <router-link to="cardetails" class="car-card" v-ripple v-for="(car, index) in cars" :key="index">
+          <div class="bg-white rounded-lg overflow-hidden shadow-lg border-2">
             <!-- Car image -->
             <img :src="require(`@/assets/img/${car.image}`)" alt="Car Image" class="w-full h-48 object-cover">
   
             <!-- Car details -->
-            <div class="p-4">
+            <div class="p-4 text-left">
               <h2 class="text-xl font-semibold mb-2">{{ car.name }}</h2>
-              <p class="text-gray-600 mb-2">Color: {{ car.color }}</p>
-              <p class="text-gray-600 mb-2">Rent: ${{ car.rent }}/day</p>
+              <p class="text-gray-600 mb-1">Color: {{ car.color }}</p>
+              <p class="text-gray-600 mb-1">Rent: ${{ car.rent }}/day</p>
               <p class="text-gray-600">Mileage: {{ car.mileage }} miles</p>
             </div>
-  
             <!-- Rent button with router-link to navigate to the details page -->
             <!-- <router-link :to="{ name: 'CarDetails', params: { id: car.id } }" class="block bg-blue-500 text-white py-2 px-4 text-center hover:bg-blue-600">
               Rent
@@ -112,6 +114,13 @@ import NavbarComponent from '@/components/NavbarComponent.vue';
   </script>
   
   <style scoped>
-  /* Add any additional styling here */
+
+.car-card {
+  transition: transform 0.2s ease;
+}
+
+  .car-card:hover {
+    transform: scale(1.04);
+  }
   </style>
   
