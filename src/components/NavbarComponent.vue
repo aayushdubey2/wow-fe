@@ -5,7 +5,7 @@
     <!-- Links -->
     <div class="w-1/5 flex items-center justify-end">
       <!-- Home logo -->
-      <router-link to="home" class="flex items-center text-white group relative">
+      <router-link to="/home" class="flex items-center text-white group relative">
         <img :src="icons['homeIcon']" alt="" class="inline-block mr-1 h-3" />
         <span class="inline-block align-middle">Home</span>
         <div class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-800 to-purple-400"></div>
@@ -66,7 +66,7 @@ export default {
       this.dropdownOpen = false;
     },
     logout() {
-      this.$router.push('login')
+      this.$router.replace({ name: 'login' });
     }
   },
 };

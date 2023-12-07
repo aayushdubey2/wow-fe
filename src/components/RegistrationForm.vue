@@ -122,6 +122,7 @@ export default {
           if (data.full_name && data.type) {
             localStorage.setItem('name', data.full_name)
             localStorage.setItem('type', data.type)
+            localStorage.setItem('customerID', data.id)
             this.$router.push('home')
           } else {
             alert('Registration failed!')

@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import CarCatalogue from '../views/CarCatalogue.vue'
 import CarDetailsView from '../views/CarDetailsView.vue'
+import BookingsView from '../views/BookingsView.vue'
 
 const routes = [
   {
@@ -24,12 +25,17 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/bookings",
+    name: "bookings",
+    component: BookingsView,
+  },
+  {
     path: "/rentcar",
     name: "rentcar",
     component: CarCatalogue,
   },
   {
-    path: "/cardetails",
+    path: "/cardetails/:carId",
     name: "cardetails",
     component: CarDetailsView,
   }

@@ -56,6 +56,7 @@ export default {
           if (data.message == 'Login successful') {
             localStorage.setItem('name', data.name)
             localStorage.setItem('type', data.type)
+            localStorage.setItem('customerID', data.id)
             this.$router.push('home')
           } else {
             alert('Authentication failed!')

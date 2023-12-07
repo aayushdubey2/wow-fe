@@ -1,126 +1,63 @@
 <template>
-    <NavbarComponent class="fixed top-0 left-0 right-0 z-10 h-15"/>
-    <div>
-      <!-- <h1 class="text-3xl font-semibold mb-4">Available Cars</h1> -->
-      <div class="text-left m-5 mt-20 font-bold">
-          You are just one click away from your dream vaccation! Click on any card to rent that car!
-        </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mb-10">
-        <!-- Loop through the list of cars and display each as a card -->
-        <router-link to="cardetails" class="car-card" v-ripple v-for="(car, index) in cars" :key="index">
-          <div class="bg-white rounded-lg overflow-hidden shadow-lg border-2">
-            <!-- Car image -->
-            <img :src="require(`@/assets/img/${car.image}`)" alt="Car Image" class="w-full h-48 object-cover">
-  
-            <!-- Car details -->
-            <div class="p-4 text-left">
-              <h2 class="text-xl font-semibold mb-2">{{ car.name }}</h2>
-              <p class="text-gray-600 mb-1">Color: {{ car.color }}</p>
-              <p class="text-gray-600 mb-1">Rent: ${{ car.rent }}/day</p>
-              <p class="text-gray-600">Mileage: {{ car.mileage }} miles</p>
-            </div>
-            <!-- Rent button with router-link to navigate to the details page -->
-            <!-- <router-link :to="{ name: 'CarDetails', params: { id: car.id } }" class="block bg-blue-500 text-white py-2 px-4 text-center hover:bg-blue-600">
-              Rent
-            </router-link> -->
-          </div>
-        </router-link>
-      </div>
+  <div>
+    <NavbarComponent class="fixed top-0 left-0 right-0 z-10 h-15" />
+    <div class="text-left m-5 mt-20 font-bold">
+      You are just one click away from your dream vacation! Click on any card to rent that car!
     </div>
-  </template>
-  
-  <script>
-import NavbarComponent from '@/components/NavbarComponent.vue';
-  export default {
-  components: { NavbarComponent },
-    data() {
-      return {
-        cars: [
-          {
-            id: 1,
-            name: 'Car 1',
-            color: 'Red',
-            rent: 50,
-            mileage: 10000,
-            image: 'car1.jpeg',
-          },
-          {
-            id: 2,
-            name: 'Car 2',
-            color: 'Blue',
-            rent: 60,
-            mileage: 12000,
-            image: 'car2.jpg',
-          },
-          {
-            id: 3,
-            name: 'Car 1',
-            color: 'Red',
-            rent: 50,
-            mileage: 10000,
-            image: 'car1.jpeg',
-          },
-          {
-            id:4,
-            name: 'Car 2',
-            color: 'Blue',
-            rent: 60,
-            mileage: 12000,
-            image: 'car2.jpg',
-          },{
-            id: 5,
-            name: 'Car 1',
-            color: 'Red',
-            rent: 50,
-            mileage: 10000,
-            image: 'car1.jpeg',
-          },
-          {
-            id: 6,
-            name: 'Car 2',
-            color: 'Blue',
-            rent: 60,
-            mileage: 12000,
-            image: 'car2.jpg',
-          },
-          {
-            id: 7,
-            name: 'Car 1',
-            color: 'Red',
-            rent: 50,
-            mileage: 10000,
-            image: 'car1.jpeg',
-          },
-          {
-            id: 8,
-            name: 'Car 2',
-            color: 'Blue',
-            rent: 60,
-            mileage: 12000,
-            image: 'car2.jpg',
-          },
-          {
-            id: 9,
-            name: 'Car 1',
-            color: 'Red',
-            rent: 50,
-            mileage: 10000,
-            image: 'car1.jpeg',
-          }
-        ],
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mb-10">
+      <!-- Loop through the list of cars and display each as a card -->
+      <router-link :to="'/cardetails/' + car.VIN" class="car-card" v-ripple v-for="(car, index) in cars" :key="index">
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg border-2">
+          <!-- Car image -->
+          <img :src="require(`@/assets/img/${car.Image}`)" alt="Car Image" class="w-full h-48 object-cover">
 
+          <!-- Car details -->
+          <div class="p-4 text-left">
+            <h2 class="text-xl font-semibold mb-2">{{ car.Make + " " + car.Model }}</h2>
+            <p class="text-gray-600 mb-1">Class: {{ car.RentalClass.Class }}</p>
+            <p class="text-gray-600 mb-1">Rent: ${{ car.RentalClass.DailyRate }}/day</p>
+          </div>
+        </div>
+      </router-link>
+    </div>
+  </div>
+</template>
+
+<script>
+import NavbarComponent from '@/components/NavbarComponent.vue';
+import axios from 'axios';
+
+export default {
+  components: { NavbarComponent },
+  data() {
+    return {
+      cars: []  // Initialize cars as an empty array
+    };
+  },
+  mounted() {
+    this.getAllAvailableCars();
+  },
+  methods: {
+    getAllAvailableCars() {
+      axios.get('http://127.0.0.1:5000/api/getallvehicles')
+        .then(response => {
+          this.cars = response.data;
+          console.log(this.cars);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }
+};
+</script>
+
+<style scoped>
 .car-card {
   transition: transform 0.2s ease;
 }
 
-  .car-card:hover {
-    transform: scale(1.04);
-  }
-  </style>
-  
+.car-card:hover {
+  transform: scale(1.04);
+}
+</style>
