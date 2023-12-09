@@ -1,10 +1,10 @@
 <template>
   <div class="split-horizontal flex justify-start carousel">
-    <router-link v-ripple v-if="items[0]" to="rentcar" @click="handleRouterLinkClick(items[1].id)"
+    <router-link v-ripple v-if="items[0]" :to="items[0].route" @click="handleRouterLinkClick(items[1].id)"
       class="yield-card card hover:shadow-2xl w-1/2 py-5 px-5 flex-col">
       <div class="text-left flex items-center justify-between" style="height: 20%;">
         <div class="flex items-center">
-          <img :src="icons['rentCar']" alt="" class="inline h-9 m-1">
+          <img :src="icons[items[0].icon]" alt="" class="inline h-9 m-1">
           <span class="font-bold text-lg">{{ items[0].title }}</span>
         </div>
         <img v-if="!items[0].id" :src="icons['clockIconPurple']" alt="" class="inline mr-1 h-4">
@@ -15,11 +15,11 @@
       </div>
     </router-link>
 
-    <router-link v-ripple v-if="items[1]" to="bookings" @click="handleRouterLinkClick(items[1].id)"
+    <router-link v-ripple v-if="items[1]" :to="items[1].route" @click="handleRouterLinkClick(items[1].id)"
       class="combustion-card card hover:shadow-2xl w-1/2 py-5 px-5 flex-col">
       <div class="text-left flex items-center justify-between" style="height: 20%;">
         <div class="flex items-center">
-          <img :src="icons['bookings']" alt="" class="inline h-9 m-1">
+          <img :src="icons[items[1].icon]" alt="" class="inline h-9 m-1">
           <span class="font-bold text-lg">{{ items[1].title }}</span>
         </div>
         <img v-if="!items[1].id" :src="icons['clockIconRed']" alt="" class="inline mr-1 h-4">
@@ -30,11 +30,11 @@
       </div>
     </router-link>
 
-    <router-link v-ripple v-if="items[2]" to="contactus" @click="handleRouterLinkClick(items[1].id)"
+    <router-link v-ripple v-if="items[2]" :to="items[2].route" @click="handleRouterLinkClick(items[1].id)"
       class="blowing-card card hover:shadow-2xl w-1/2 py-5 px-5 flex-col">
       <div class="text-left flex items-center justify-between" style="height: 20%;">
         <div class="flex items-center">
-          <img :src="icons['contactUs']" alt="" class="inline h-9 m-1">
+          <img :src="icons[items[2].icon]" alt="" class="inline h-9 m-1">
           <span class="font-bold text-lg">{{ items[2].title }}</span>
         </div>
         <img v-if="!items[2].id" :src="icons['clockIconRed']" alt="" class="inline mr-1 h-4">
@@ -60,6 +60,9 @@ export default {
         rentCar: require('@/assets/img/rent-car.svg'),
         bookings: require('@/assets/img/bookings.svg'),
         contactUs: require('@/assets/img/contact-us.svg'),
+        manageBookings: require('@/assets/img/managebooking.svg'),
+        addCar: require('@/assets/img/addcar.svg'),
+        addLocation: require('@/assets/img/newlocation.svg'),
         purpleArrowIcon: require('@/assets/img/purple-arrow-icon.svg'),
         redArrowIcon: require('@/assets/img/red-arrow-icon.svg'),
         aquaArrowIcon: require('@/assets/img/aqua-arrow-icon.svg'),

@@ -38,7 +38,7 @@
 import CarouselRow from '@/components/CarouselRow.vue';
 import NavbarComponent from '@/components/NavbarComponent.vue';
 export default {
-    name: 'Home',
+    name: 'AdminHomeView',
     components: {
         CarouselRow,
         NavbarComponent
@@ -57,9 +57,9 @@ export default {
 
             items:
                 [
-                    { icon: 'rentCar',title: 'Rent a car!', route: 'rentcar', id: 1, description: 'Rent a car, shift gears to adventure, and drive your vacation dreams into reality!' },
-                    { icon: 'bookings',title: 'View Bookings!',route: 'bookings' , id: 2, description: 'View and manage your bookings effortlessly. Take control of your travel plans.' },
-                    { icon: 'contactUs',title: 'Contact us!',route: 'contactus' , id: 3, description: 'Have questions or need assistance? Reach out to our support team through our Contact Us page' }
+                    {icon: 'manageBookings', title: 'Manage Bookings',route: 'bookings', id: 1, description: 'View and manage all bookings effortlessly.' },
+                    {icon: 'addCar', title: 'Add Cars & Classes',route: 'carorclass', id: 2, description: 'Add a new car to the inventory or introduce a new class of cars.' },
+                    {icon: 'addLocation', title: 'Add Location',route: 'addlocation', id: 3, description: 'Expanding? Add a new branch of your company.' }
                 ]
         };
     },
@@ -115,6 +115,7 @@ export default {
 .sets-container .rounded-lg.active {
     display: block;
 }
+
 
 @keyframes slideInRight {
     from {

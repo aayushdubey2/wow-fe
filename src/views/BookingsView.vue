@@ -1,19 +1,21 @@
 <template>
+    <NavbarComponent />
     <div class="container mx-auto p-4">
-      <h1 class="text-3xl font-semibold mb-4">My Bookings</h1>
       <div v-if="bookings.length === 0" class="text-gray-600">No bookings available.</div>
       <div v-else>
-        <booking v-for="booking in bookings" :key="booking.id" :booking="booking" />
+        <booking v-for="booking in bookings" :key="booking.id" :booking="booking" @update-bookings="getAllBookings"/>
       </div>
     </div>
   </template>
   
   <script>
   import Booking from '@/components/Booking.vue'; // Adjust the path based on your project structure
+  import NavbarComponent from '@/components/NavbarComponent.vue';
   import axios from 'axios';
   export default {
     components: {
       Booking,
+      NavbarComponent
     },
     data() {
       return {
@@ -21,7 +23,12 @@
       };
     },
     created() {
-        axios.get(`http://127.0.0.1:5000/api/rentals`)
+      this.getAllBookings()
+    },
+    methods: {
+      getAllBookings(){
+        const bookingsEndpoint = this.getType == 'Admin' ? `${process.env.VUE_APP_API_BASE_URL}api/rentals` : `${process.env.VUE_APP_API_BASE_URL}api/rentals/${this.getCustomerID}`
+        axios.get(bookingsEndpoint)
         .then(response => {
           this.bookings = response.data;
           console.log(this.bookings);
@@ -29,7 +36,16 @@
         .catch(error => {
           console.error('Error fetching data:', error);
         })
+      }
     },
+    computed: {
+      getType(){
+        return localStorage.getItem('type')
+      },
+      getCustomerID(){
+        return localStorage.getItem('customerID')
+      }
+    }
   };
   </script>
   

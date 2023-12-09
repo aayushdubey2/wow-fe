@@ -10,8 +10,7 @@
         <form @submit.prevent="submitForm">
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-            <input v-model="email" type="email" id="email" name="email"
-              class="mt-1 p-2 w-full border rounded-md">
+            <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
           </div>
           <div class="mb-4">
             <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
@@ -19,6 +18,7 @@
               class="mt-1 p-2 w-full border rounded-md">
           </div>
           <div class="flex justify-end">
+            <button @click.prevent="$emit('close-form')" class="px-4 py-2 mr-2 bg-gray-400 text-white rounded">Close</button>
             <button type="submit" class="px-4 py-2 k-bg-pink text-white rounded">Submit</button>
           </div>
         </form>
@@ -36,11 +36,13 @@ export default {
     };
   },
   props: {
-    isOpen: false
+    isOpen: false,
+    isAdminLogin: false
   },
   methods: {
     submitForm() {
-      fetch(`${process.env.VUE_APP_API_BASE_URL}api/login`, {
+      const loginEndPoint = this.isAdminLogin ? `${process.env.VUE_APP_API_BASE_URL}api/adminlogin` : `${process.env.VUE_APP_API_BASE_URL}api/login`
+      fetch(loginEndPoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,10 +56,16 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           if (data.message == 'Login successful') {
-            localStorage.setItem('name', data.name)
-            localStorage.setItem('type', data.type)
-            localStorage.setItem('customerID', data.id)
-            this.$router.push('home')
+            if (this.isAdminLogin) {
+              localStorage.setItem('name', data.name)
+              localStorage.setItem('type', 'Admin')
+              this.$router.push('adminhome')
+            } else {
+              localStorage.setItem('name', data.name)
+              localStorage.setItem('type', data.type)
+              localStorage.setItem('customerID', data.id)
+              this.$router.push('home')
+            }
           } else {
             alert('Authentication failed!')
             this.$router.push('login')

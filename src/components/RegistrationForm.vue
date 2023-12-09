@@ -74,6 +74,7 @@
             </div>
           </div>
           <div class="flex justify-end">
+            <button @click.prevent="$emit('close-registration-form')" class="px-4 py-2 mr-2 bg-gray-400 text-white rounded">Close</button>
             <button type="submit" class="px-4 py-2 k-bg-pink text-white rounded">Submit</button>
           </div>
         </form>

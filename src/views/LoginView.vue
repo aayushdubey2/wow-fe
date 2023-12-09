@@ -2,7 +2,7 @@
   <div class="flex items-center h-screen">
     <!-- Left half with an image -->
     <!-- <Loader :loading="loading" /> -->
-    <LoginForm :isOpen="isOpen" @close-form="isOpen = false" />
+    <LoginForm :isOpen="isOpen" :isAdminLogin="isAdminLogin" @close-form="isOpen = false" />
     <RegistrationForm :isOpen="isRegistrationFormOpen" @close-registration-form="isRegistrationFormOpen = false" />
     <div class="w-1/2 h-screen relative flex justify-center items-center">
       <div class="flex flex-col items-center">
@@ -15,7 +15,9 @@
           Sign In
         </button>
         <p class="mt-3 text-xs">Don't have an account? <button class="k-text-pink"
-            @click="isRegistrationFormOpen = true">register</button></p>
+            @click="isRegistrationFormOpen = true">Register</button></p>
+        <p class="mt-3 text-xs">Are you an admin? <button class="k-text-pink" @click="isAdminLogin=true; isOpen = true">Login
+            here</button></p>
         <div class="w-2/3 text-justify text-xs mt-10">
           By clicking on 'Sign In', you confirm to have read the 'World on wheels
           Privacy Statement' and provide consent to use your personal
@@ -31,10 +33,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
 import Loader from '@/components/Loader.vue'
-import { useStore } from "vuex";
 import LoginForm from '@/components/LoginForm.vue'
 import RegistrationForm from '@/components/RegistrationForm.vue'
 export default {
@@ -42,6 +41,7 @@ export default {
   data() {
     return {
       isOpen: false,
+      isAdminLogin: false,
       isRegistrationFormOpen: false,
     }
   },
@@ -49,34 +49,6 @@ export default {
     Loader,
     LoginForm,
     RegistrationForm
-  },
-  methods: {
-    signIn() {
-      loading.value = true;
-      fetch(`${process.env.VUE_APP_API_BASE_URL}api/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          'email': email,
-          'password': password
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if(data.message){
-            this.$router.push('home')
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          loading.value = false;
-        });
-    }
   }
 };
 </script>
