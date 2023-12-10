@@ -53,10 +53,12 @@ export default {
   },
   computed: {
     getName(){
-      return localStorage.getItem('name')
+      const storedName = localStorage.getItem('name');
+      return storedName.charAt(0).toUpperCase() + storedName.slice(1);
     },
     getType(){
-      return localStorage.getItem('type')
+      const type = localStorage.getItem('type')
+      return type.charAt(0).toUpperCase() + type.slice(1);
     },
     getHomeRoute(){
       const type  = localStorage.getItem('type')
@@ -75,6 +77,7 @@ export default {
       this.dropdownOpen = false;
     },
     logout() {
+      localStorage.clear()
       this.$router.replace({ name: 'login' });
     }
   },

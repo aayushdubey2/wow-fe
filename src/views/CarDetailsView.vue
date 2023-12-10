@@ -149,7 +149,16 @@ export default {
         })
         .catch(error => {
           console.error('Error:', error.response.data);
+        }).finally(()=> {
+          this.clearData()
+          this.$router.push('/bookings')
         });
+    },
+    clearData(){
+      this.pickupLocation = null
+      this.dropLocation = null
+      this.pickupdate = null
+      this.dropdate = null
     }
   }
 };

@@ -1,12 +1,10 @@
 <template>
   <div>
     <NavbarComponent class="fixed top-0 left-0 right-0 z-10 h-15" />
-    <div class="text-left m-5 mt-20 font-bold">
-      You are just one click away from your dream vacation! Click on any card to rent that car!
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mb-10">
+    <br>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mt-20">
       <!-- Loop through the list of cars and display each as a card -->
-      <router-link :to="'/cardetails/' + car.VIN" class="car-card" v-ripple v-for="(car, index) in cars" :key="index">
+      <router-link title="Click to rent the car" :to="'/cardetails/' + car.VIN" class="car-card" v-ripple v-for="(car, index) in cars" :key="index">
         <div class="bg-white rounded-lg overflow-hidden shadow-lg border-2">
           <!-- Car image -->
           <img :src="require(`@/assets/img/${car.Image}`)" alt="Car Image" class="w-full h-48 object-cover">

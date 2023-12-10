@@ -7,12 +7,12 @@
             <form @submit.prevent="addVehicle" class="space-y-4">
                 <!-- Car Details Form -->
                 <div class="flex justify-between">
-                    <div class="mr-5">
+                    <div class="w-1/2 mr-5">
                         <label class="block text-gray-700">Make</label>
                         <input v-model="vehicleDetails.Make" class="mt-1 p-2 w-full border rounded-md" required>
                     </div>
 
-                    <div>
+                    <div class="w-1/2">
                         <label class="block text-gray-700">Model</label>
                         <input v-model="vehicleDetails.Model" class="mt-1 p-2 w-full border rounded-md" required>
                     </div>

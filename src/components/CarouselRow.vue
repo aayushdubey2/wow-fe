@@ -1,5 +1,5 @@
 <template>
-  <div class="split-horizontal flex justify-start carousel">
+  <div class="split-horizontal flex justify-around carousel">
     <router-link v-ripple v-if="items[0]" :to="items[0].route" @click="handleRouterLinkClick(items[1].id)"
       class="yield-card card hover:shadow-2xl w-1/2 py-5 px-5 flex-col">
       <div class="text-left flex items-center justify-between" style="height: 20%;">

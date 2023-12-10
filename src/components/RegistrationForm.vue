@@ -7,28 +7,29 @@
     <div v-if="isOpen" class="fixed inset-0 z-20 flex items-center justify-center text-left">
       <div class="bg-white p-8 rounded shadow-md w-1/2">
         <h2 class="text-2xl font-semibold mb-4">Register</h2>
+        <hr class="mb-5">
         <form @submit.prevent="submitForm">
           <div class="flex justify-between">
             <div class="mb-2 w-1/2 mr-5">
               <label for="name" class="block text-sm font-sm text-gray-600">Name</label>
-              <input v-model="name" type="text" id="name" name="name" class="mt-1 p-2 w-full border rounded-md">
+              <input v-model="name" type="text" id="name" name="name" class="mt-1 p-2 w-full border rounded-md" required>
             </div>
             <div class="mb-2 w-1/2">
               <label for="phone" class="block text-sm font-sm text-gray-600">Phone Number</label>
-              <input v-model="phone" type="tel" id="phone" name="phone" class="mt-1 p-2 w-full border rounded-md">
+              <input v-model="phone" type="tel" id="phone"  pattern="[0-9]{1,10}" name="phone" class="mt-1 p-2 w-full border rounded-md">
             </div>
           </div>
 
           <div class="flex justify-between">
             <div class="mb-2 w-1/2 mr-5">
               <label for="email" class="block text-sm font-sm text-gray-600">Email</label>
-              <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
+              <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md" required>
             </div>
 
             <div class="mb-2 w-1/2">
               <label for="password" class="block text-sm font-sm text-gray-600">Password</label>
               <input v-model="password" type="password" id="password" name="password"
-                class="mt-1 p-2 w-full border rounded-md">
+                class="mt-1 p-2 w-full border rounded-md" required>
             </div>
 
           </div>
@@ -41,7 +42,7 @@
             <div class="w-1/2 mr-5">
               <div class="mb-2">
                 <label for="userType" class="block text-sm font-sm text-gray-600">User Type</label>
-                <select v-model="userType" id="userType" name="userType" class="mt-1 p-2 w-full border rounded-md">
+                <select v-model="userType" id="userType" name="userType" class="mt-1 p-2 w-full border rounded-md" required>
                   <option value="individual">Individual</option>
                   <option value="corporate">Corporate</option>
                 </select>

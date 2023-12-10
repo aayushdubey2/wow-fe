@@ -7,18 +7,19 @@
     <div v-if="isOpen" class="text-left fixed inset-0 z-20 flex items-center justify-center">
       <div class="bg-white p-8 rounded shadow-md w-2/5">
         <h2 class="text-2xl font-semibold mb-4">Sign In</h2>
+        <hr class="mb-5">
         <form @submit.prevent="submitForm">
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-            <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
+            <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md" required>
           </div>
           <div class="mb-4">
             <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
             <input v-model="password" type="password" id="password" name="password"
-              class="mt-1 p-2 w-full border rounded-md">
+              class="mt-1 p-2 w-full border rounded-md" required>
           </div>
           <div class="flex justify-end">
-            <button @click.prevent="$emit('close-form')" class="px-4 py-2 mr-2 bg-gray-400 text-white rounded">Close</button>
+            <button @click.prevent="closeForm" class="px-4 py-2 mr-2 bg-gray-400 text-white rounded">Close</button>
             <button type="submit" class="px-4 py-2 k-bg-pink text-white rounded">Submit</button>
           </div>
         </form>
@@ -73,9 +74,19 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+        }).finally(()=> {
+          this.clearData()
         })
       this.$emit('close-form')
     },
+    clearData(){
+      this.email ='',
+      this.password = ''
+    },
+    closeForm(){
+      this.clearData()
+      this.$emit('close-form')
+    }
   },
 };
 </script>

@@ -25,7 +25,7 @@
         </div>
 
         <div class="sets-container p-5">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-around">
                 <div :class="['rounded-lg text-left', { active: activeSetIndex === 0 }]">
                     <CarouselRow :items="items" class="cards-row" @sub-option-selected="handleRouterLinkClick" />
                 </div>
