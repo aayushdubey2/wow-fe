@@ -2,7 +2,8 @@
   <div>
     <NavbarComponent class="fixed top-0 left-0 right-0 z-10 h-15" />
     <br>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mt-20">
+    <div v-if="cars.length === 0" class="text-gray-600 mt-20">No Cars available.</div>
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-5 mt-20">
       <!-- Loop through the list of cars and display each as a card -->
       <router-link title="Click to rent the car" :to="'/cardetails/' + car.VIN" class="car-card" v-ripple v-for="(car, index) in cars" :key="index">
         <div class="bg-white rounded-lg overflow-hidden shadow-lg border-2">

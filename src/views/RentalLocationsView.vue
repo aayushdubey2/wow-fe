@@ -1,6 +1,7 @@
 <template>
     <NavbarComponent />
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-5">
+    <div v-if="locations.length === 0" class="text-gray-600 mt-5">No Locations available.</div>
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-5">
       <!-- Loop through each location -->
       <div v-for="(location, index) in locations" :key="index" class="bg-gray-300 p-4 rounded-lg shadow-md">
         <!-- Shop Image -->

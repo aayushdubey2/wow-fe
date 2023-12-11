@@ -24,7 +24,7 @@
 
         <!-- Dropdown Content -->
         <div v-if="dropdownOpen" class="absolute right-0 mt-2 bg-white border rounded-md shadow-md">
-          <router-link to="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">View Profile</router-link>
+          <router-link v-if="showProfile" to="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">View Profile</router-link>
           <button @click="logout" class="w-100 block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</button>
         </div>
       </div>
@@ -59,6 +59,10 @@ export default {
     getType(){
       const type = localStorage.getItem('type')
       return type.charAt(0).toUpperCase() + type.slice(1);
+    },
+    showProfile(){
+      const type = localStorage.getItem('type')
+      return type!= 'Admin'
     },
     getHomeRoute(){
       const type  = localStorage.getItem('type')

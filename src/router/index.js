@@ -8,6 +8,7 @@ import BookingsView from '../views/BookingsView.vue'
 import RentalLocationsView from '../views/RentalLocationsView.vue'
 import AddCarOrClassView from '../views/AddCarOrClassView.vue'
 import AddLocationView from '../views/AddLocationView.vue'
+import ProfileView from '../views/ProfileView.vue'
 
 const routes = [
   {
@@ -75,6 +76,14 @@ const routes = [
     path: "/addlocation",
     name: "addlocation",
     component: AddLocationView,
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: ProfileView,
     meta: {
       requiresAuth: true,
     }

@@ -6,10 +6,10 @@
     <!-- Modal -->
     <div v-if="isOpen" class="fixed inset-0 z-20 flex items-center justify-center text-left">
       <div class="bg-white p-8 rounded shadow-md w-1/2">
-      <div class="flex items-center mb-4">
-        <img :src="require('@/assets/img/login.svg')" alt="" class="inline h-10 mr-1">
-        <h2 class="text-2xl font-semibold inline">Register</h2>
-      </div> 
+        <div class="flex items-center mb-4">
+          <img :src="require('@/assets/img/login.svg')" alt="" class="inline h-10 mr-1">
+          <h2 class="text-2xl font-semibold inline">Register</h2>
+        </div>
         <hr class="mb-5">
         <form @submit.prevent="submitForm">
           <div class="flex justify-between">
@@ -19,14 +19,16 @@
             </div>
             <div class="mb-2 w-1/2">
               <label for="phone" class="block text-sm font-sm text-gray-600">Phone Number</label>
-              <input v-model="phone" type="tel" id="phone"  pattern="[0-9]{1,10}" name="phone" class="mt-1 p-2 w-full border rounded-md">
+              <input v-model="phone" type="tel" id="phone" pattern="[0-9]{1,10}" name="phone"
+                class="mt-1 p-2 w-full border rounded-md">
             </div>
           </div>
 
           <div class="flex justify-between">
             <div class="mb-2 w-1/2 mr-5">
               <label for="email" class="block text-sm font-sm text-gray-600">Email</label>
-              <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md" required>
+              <input v-model="email" type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md"
+                required>
             </div>
 
             <div class="mb-2 w-1/2">
@@ -36,16 +38,24 @@
             </div>
 
           </div>
-          <div class="mb-2">
-            <label for="address" class="block text-sm font-sm text-gray-600">Address</label>
-            <input v-model="address" type="text" id="address" name="address" class="mt-1 p-2 w-full border rounded-md">
+
+          <div class="flex justify-between items-end mb-2">
+            <div class="w-1/2 mr-5">
+              <label for="address" class="block text-sm font-sm text-gray-600">Address</label>
+              <input v-model="address" type="text" id="address" name="address" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="w-1/2">
+              <label class="block text-sm font-sm text-gray-600">Profile Picture</label>
+              <input type="file" @change="handleFileChange" class="mt-1 p-2 w-full border rounded-md">
+            </div>
           </div>
 
           <div class="flex justify-between">
             <div class="w-1/2 mr-5">
               <div class="mb-2">
                 <label for="userType" class="block text-sm font-sm text-gray-600">User Type</label>
-                <select v-model="userType" id="userType" name="userType" class="mt-1 p-2 w-full border rounded-md" required>
+                <select v-model="userType" id="userType" name="userType" class="mt-1 p-2 w-full border rounded-md"
+                  required>
                   <option value="individual">Individual</option>
                   <option value="corporate">Corporate</option>
                 </select>
@@ -78,7 +88,8 @@
             </div>
           </div>
           <div class="flex justify-end">
-            <button @click.prevent="$emit('close-registration-form')" class="px-4 py-2 mr-2 bg-gray-400 text-white rounded">Close</button>
+            <button @click.prevent="$emit('close-registration-form')"
+              class="px-4 py-2 mr-2 bg-gray-400 text-white rounded">Close</button>
             <button type="submit" class="px-4 py-2 k-bg-pink text-white rounded">Submit</button>
           </div>
         </form>
@@ -92,6 +103,7 @@ export default {
   data() {
     return {
       isOpen: false,
+      profileImage: 'user.svg',
       name: '',
       phone: '',
       address: '',
@@ -119,6 +131,7 @@ export default {
           'Email': this.email, 'Password': this.password, 'Phone': this.phone,
           "DriverLicenseNumber": this.driverLicense,
           "InsuranceCompanyName": this.insuranceCompany, "InsurancePolicyNumber": this.insurancePolicy,
+          "Image": this.profileImage,
           "CorporationName": this.corporateName, "RegistrationNumber": this.registrationNumber, "EmployeeID": this.employeeId
         }),
       })
@@ -140,6 +153,9 @@ export default {
       this.$emit('close-form')
       console.log('Form submitted', this.$data);
       this.$emit('close-registration-form');
+    },
+    handleFileChange(event) {
+      this.profileImage = event.target.files[0].name;
     },
   },
   props: {
