@@ -6,7 +6,10 @@
     <!-- Modal -->
     <div v-if="isOpen" class="text-left fixed inset-0 z-20 flex items-center justify-center">
       <div class="bg-white p-8 rounded shadow-md w-2/5">
-        <h2 class="text-2xl font-semibold mb-4">Sign In</h2>
+      <div class="flex items-center mb-4">
+        <img :src="require('@/assets/img/login.svg')" alt="" class="inline h-10 mr-1">
+        <h2 class="text-2xl font-semibold inline">Sign In</h2>
+      </div>    
         <hr class="mb-5">
         <form @submit.prevent="submitForm">
           <div class="mb-4">

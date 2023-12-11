@@ -81,7 +81,6 @@ export default {
           console.error('Error fetching data:', error);
         }).finally(() => {
           this.showForm = false
-          this.$emit('update-bookings')
         });
     },
     updateVehicleOdometer(odometerRating, vehicleID) {
@@ -98,6 +97,8 @@ export default {
         })
         .catch(error => {
           console.error('Error fetching data:', error);
+        }).finally(()=> {
+          this.$emit('update-bookings')
         })
     },
     openInvoicePopup() {
@@ -108,6 +109,7 @@ export default {
     },
     closePaymentPopup() {
       this.showPaymentPopup = false;
+      this.$emit('update-bookings')
     },
     openPaymentPopup(obj) {
       this.showPaymentPopup = true;

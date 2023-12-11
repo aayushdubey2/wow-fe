@@ -30,8 +30,7 @@
         const bookingsEndpoint = this.getType == 'Admin' ? `${process.env.VUE_APP_API_BASE_URL}api/rentals` : `${process.env.VUE_APP_API_BASE_URL}api/rentals/${this.getCustomerID}`
         axios.get(bookingsEndpoint)
         .then(response => {
-          this.bookings = response.data;
-          console.log(this.bookings);
+          this.bookings = response.data.reverse();
         })
         .catch(error => {
           console.error('Error fetching data:', error);

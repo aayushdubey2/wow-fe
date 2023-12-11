@@ -5,8 +5,6 @@
                     <img :src="require('@/assets/img/payment.svg')" alt="" class="inline h-10 mr-1">
                     <h2 class="text-lg font-semibold inline">Make Payment</h2>
                 </div>
-            <!-- <p>Amount to be paid: $ {{ invoice.InvoiceAmount }}</p> -->
-
             <!-- Payment Mode Dropdown -->
             <div>
                 <hr class="my-5">

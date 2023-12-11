@@ -14,20 +14,24 @@
                 <p>Total Amount: $ {{ invoice.InvoiceAmount }}</p>
                 <div v-if="paymentDetails.PaymentID" class="mt-5">
                     <div>
-                        <p class="inline">Payment Status: <v-badge color="success" content="Done" inline></v-badge> </p>   
+                        <p class="inline">Payment Status: <v-badge color="success" content="Done" inline></v-badge> </p>
                     </div>
                     <div class="flex justify-between mt-5">
-                        <button @click="openPayment" class="bg-green-500 text-white px-4 py-2 mt-3 rounded-md">View payment details</button>
-                        <button @click="$emit('close-invoice')" class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
+                        <button @click="openPayment" class="bg-green-500 text-white px-4 py-2 mt-3 rounded-md">View payment
+                            details</button>
+                        <button @click="$emit('close-invoice')"
+                            class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
                     </div>
                 </div>
                 <div v-else class="mt-5">
                     <div>
-                        <p class="inline">Payment Status: <v-badge color="error" content="Pending" inline></v-badge> </p>   
+                        <p class="inline">Payment Status: <v-badge color="error" content="Pending" inline></v-badge> </p>
                     </div>
                     <div class="flex justify-between mt-5">
-                        <button @click="openPayment" class="text-white px-4 py-2 mt-3 rounded-md" style="background-color: #BE3144;">Make Payment</button>
-                        <button @click="$emit('close-invoice')" class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
+                        <button @click="openPayment" class="text-white px-4 py-2 mt-3 rounded-md"
+                            style="background-color: #BE3144;">Make Payment</button>
+                        <button @click="$emit('close-invoice')"
+                            class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
                     </div>
                 </div>
 
@@ -53,6 +57,16 @@ export default {
         showInvoicePopup: false,
         booking: Object
     },
+    watch: {
+        booking: {
+            handler(newBooking, oldBooking) {
+                if (newBooking.RentalStatus !== oldBooking.RentalStatus) {
+                    this.getInvoiceDetails()
+                }
+            },
+            deep: true
+        }
+    },
     methods: {
         makePayment() {
             console.log('Payment made with mode:', this.selectedPaymentMode);
@@ -62,6 +76,22 @@ export default {
         handlePaymentModeChange() {
             this.cardNumber = '';
             this.cashAmount = 0;
+        },
+        getInvoiceDetails() {
+            axios.post(`http://127.0.0.1:5000/api/invoice`, {
+                'RentalID': this.booking.RentalID
+            })
+                .then(response => {
+                    if (response.status == 201) {
+                        this.invoice = response.data;
+                        this.getPaymentDetails()
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                }).finally(() => {
+                    this.loading = false;
+                });
         },
         getPaymentDetails() {
             axios.post(`http://127.0.0.1:5000/api/getpayment`, {
@@ -82,21 +112,7 @@ export default {
         }
     },
     created() {
-        axios.post(`http://127.0.0.1:5000/api/invoice`, {
-            'RentalID': this.booking.RentalID
-        })
-            .then(response => {
-                if (response.status == 201) {
-                    this.invoice = response.data;
-                    this.getPaymentDetails()
-                }
-
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            }).finally(() => {
-                this.loading = false;
-            });
+        this.getInvoiceDetails()
     }
 }
 </script>
