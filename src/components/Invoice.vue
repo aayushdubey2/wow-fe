@@ -17,21 +17,30 @@
                         <p class="inline">Payment Status: <v-badge color="success" content="Done" inline></v-badge> </p>
                     </div>
                     <div class="flex justify-between mt-5">
-                        <button @click="openPayment" class="bg-green-500 text-white px-4 py-2 mt-3 rounded-md">View payment
+                        <button @click="openPaymentDetails" class="bg-green-500 text-white px-4 py-2 mt-3 rounded-md">View payment
                             details</button>
                         <button @click="$emit('close-invoice')"
-                            class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
+                            class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Close</button>
                     </div>
                 </div>
                 <div v-else class="mt-5">
                     <div>
-                        <p class="inline">Payment Status: <v-badge color="error" content="Pending" inline></v-badge> </p>
+                        <p class="inline">Payment Status: <v-badge color="error" content="Pending" inline></v-badge>
+                        </p>
                     </div>
-                    <div class="flex justify-between mt-5">
-                        <button @click="openPayment" class="text-white px-4 py-2 mt-3 rounded-md"
-                            style="background-color: #BE3144;">Make Payment</button>
-                        <button @click="$emit('close-invoice')"
-                            class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
+                    <div v-if="isAdmin">
+                        <div class="flex justify-end mt-5">
+                            <button @click="$emit('close-invoice')"
+                                class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Close</button>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="flex justify-between mt-5">
+                            <button @click="openPayment" class="text-white px-4 py-2 mt-3 rounded-md"
+                                style="background-color: #BE3144;">Make Payment</button>
+                            <button @click="$emit('close-invoice')"
+                                class="bg-gray-400 text-white px-4 py-2 mt-3 rounded-md">Cancel</button>
+                        </div>
                     </div>
                 </div>
 
@@ -55,7 +64,8 @@ export default {
     },
     props: {
         showInvoicePopup: false,
-        booking: Object
+        booking: Object,
+        payment: Object
     },
     watch: {
         booking: {
@@ -63,6 +73,12 @@ export default {
                 if (newBooking.RentalStatus !== oldBooking.RentalStatus) {
                     this.getInvoiceDetails()
                 }
+            },
+            deep: true
+        }, 
+        payment: {
+            handler(newPayment, oldPayment) {
+                this.paymentDetails = newPayment
             },
             deep: true
         }
@@ -109,10 +125,19 @@ export default {
         openPayment() {
             this.$emit('open-payment', { 'id': this.invoice.InvoiceID, 'amount': this.invoice.InvoiceAmount })
             this.$emit('close-invoice')
+        },
+        openPaymentDetails() {
+            this.$emit('open-payment-details', { 'paymentDetails': this.paymentDetails, 'amount': this.invoice.InvoiceAmount })
+            this.$emit('close-invoice')
         }
     },
     created() {
         this.getInvoiceDetails()
+    },
+    computed: {
+        isAdmin() {
+            return localStorage.getItem('type') === 'Admin'
+        }
     }
 }
 </script>

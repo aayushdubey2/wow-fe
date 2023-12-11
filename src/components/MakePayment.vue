@@ -111,7 +111,8 @@ export default {
             coupon: {'CouponCode': null},
             finalAmount: null,
             showApply: true,
-            showExpiry: false
+            showExpiry: false,
+            paymentDetails: null
         }
     },
     props: {
@@ -135,6 +136,7 @@ export default {
         })
             .then(response => {
                 if(response.status == 201){
+                    this.paymentDetails = response.data
                     console.log(response)
                 }
             })
@@ -142,6 +144,7 @@ export default {
                 console.error('Error fetching data:', error);
             }).finally(()=> {
                 this.$emit('close-payment')
+                this.$emit('open-payment-details',{ 'paymentDetails': this.paymentDetails, 'amount': this.finalAmount })
             })
         },
         handlePaymentModeChange() {

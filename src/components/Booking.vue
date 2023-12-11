@@ -18,9 +18,11 @@
     </div>
     <div class="flex mt-2"><button v-ripple v-if="booking.RentalStatus === 'Closed'" @click="openInvoicePopup" class="px-5 py-1 rounded-lg" style="background-color: #F0ECE5;">View Invoice</button></div>
     <Invoice :showInvoicePopup="showInvoicePopup" @close-invoice="closeInvoicePopup" :booking="booking"
-      @open-payment="openPaymentPopup" />
+      @open-payment="openPaymentPopup" @open-payment-details="openPaymentDetails" :payment="paymentDetails" />
     <MakePayment :showPaymentPopup="showPaymentPopup" @close-payment="closePaymentPopup" :amount="amount"
-      :invoiceID="invoiceID" />
+      :invoiceID="invoiceID" @open-payment-details="openPaymentDetails" />
+    <PaymentDetails @close-payment-details="closePaymentDetails" :amount="amount"
+      :paymentDetails="paymentDetails" :showPaymentDetails="showPaymentDetails" />
     <div v-if="isAdmin">
       <div class="flex">
         <button v-if="booking.RentalStatus === 'Active' && !showForm" @click="showForm = true"
@@ -47,6 +49,7 @@
 <script>
 import Invoice from '@/components/Invoice.vue'
 import MakePayment from './MakePayment.vue'
+import PaymentDetails from './PaymentDetails.vue'
 import axios from 'axios';
 export default {
   props: {
@@ -60,11 +63,13 @@ export default {
       showForm: false,
       showInvoicePopup: false,
       showPaymentPopup: false,
-      endOdometerReading: null
+      endOdometerReading: null,
+      showPaymentDetails: false,
+      paymentDetails: null
     }
   },
   components: {
-    MakePayment, Invoice 
+    MakePayment, Invoice, PaymentDetails
   },
   methods: {
     closeBooking(booking) {
@@ -115,6 +120,14 @@ export default {
       this.showPaymentPopup = true;
       this.amount = obj.amount
       this.invoiceID = obj.id
+    },
+    openPaymentDetails(obj) {
+      this.showPaymentDetails = true;
+      this.amount = obj.amount
+      this.paymentDetails = obj.paymentDetails
+    },
+    closePaymentDetails() {
+      this.showPaymentDetails = false;
     },
     getCarDetails() {
       axios.get(`http://127.0.0.1:5000/api/vehicle/${this.booking.VehicleID}`)
