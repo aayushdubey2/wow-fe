@@ -1,5 +1,5 @@
 <template>
-    <div class="home h-screen">
+    <div class="h-screen">
         <NavbarComponent />
         <div class="flex justify-around mx-20 text-left">
             <div class="mt-10 p-6 bg-white shadow-lg rounded-lg w-1/3 text-sm">
@@ -139,7 +139,7 @@ export default {
         addVehicle() {
             axios.post(`${process.env.VUE_APP_API_BASE_URL}api/addvehicle`, this.vehicleDetails)
                 .then(response => {
-                    console.log(response.data.message);
+                    alert(response.data.message)
                 })
                 .catch(error => {
                     console.error(error);
@@ -153,18 +153,19 @@ export default {
                         Class: null,
                         Image: null
                     }
+                    this.$router.push('/cars')
                 });
         },
         addClass() {
             axios.post(`${process.env.VUE_APP_API_BASE_URL}api/addclass`, this.rentalClassDetails)
                 .then(response => {
                     this.getAllClasses()
-                    console.log(response.data.message);
+                    alert(response.data.message)
                 })
                 .catch(error => {
                     console.error(error);
                 }).finally(() => {
-                    this.vehicleDetails = {
+                    this.rentalClassDetails = {
                         Class: null,
                         DailyRate: null,
                         OverMileageFee: null
@@ -186,11 +187,3 @@ export default {
     }
 };
 </script>
-  
-<style>
-.home {
-    background-image: url("@/assets/img/bg.jpg");
-    background-size: cover;
-}
-</style>
-  

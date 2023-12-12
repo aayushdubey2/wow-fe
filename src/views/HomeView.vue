@@ -1,33 +1,36 @@
 <template>
-    <NavbarComponent />
-    <div class="split-container px-10">
-        <!-- First Horizontal Split -->
-        <div class=" text-left split-horizontal flex justify-between">
-            <!-- Left Half with Lorem Ipsum -->
-            <div class="w-1/2 mr-10 mt-10">
-                <p class="font-bold text-3xl mb-2">WORLD ON WHEELS</p>
-                <p class="text-sm">
-                    World on Wheels is a leading car rental company, offering a diverse fleet of vehicles for all your
-                    transportation needs. Committed to providing top-notch service, it has become a trusted name in the
-                    industry, ensuring a seamless rental experience.
-                    Whether you need a sedan for business, an SUV for family vacations, or a convertible for a weekend
-                    getaway, World on Wheels has a vehicle to match your preferences.
-                    World on Wheels aims to provide not just transportation but a complete mobility solution. Dedicated to
-                    customer satisfaction, it makes car rental hassle-free and enjoyable.
-                    For reliable, efficient, and stylish transportation across the USA, World on Wheels is your go-to
-                    partner.
-                </p>
+    <div class="h-screen">
+        <NavbarComponent />
+        <div class="split-container px-10">
+            <!-- First Horizontal Split -->
+            <div class=" text-left split-horizontal flex justify-between">
+                <!-- Left Half with Lorem Ipsum -->
+                <div class="w-1/2 mr-10 mt-10">
+                    <p class="font-bold text-3xl mb-2">WORLD ON WHEELS</p>
+                    <p class="text-sm">
+                        World on Wheels is a leading car rental company, offering a diverse fleet of vehicles for all your
+                        transportation needs. Committed to providing top-notch service, it has become a trusted name in the
+                        industry, ensuring a seamless rental experience.
+                        Whether you need a sedan for business, an SUV for family vacations, or a convertible for a weekend
+                        getaway, World on Wheels has a vehicle to match your preferences.
+                        World on Wheels aims to provide not just transportation but a complete mobility solution. Dedicated
+                        to
+                        customer satisfaction, it makes car rental hassle-free and enjoyable.
+                        For reliable, efficient, and stylish transportation across the USA, World on Wheels is your go-to
+                        partner.
+                    </p>
+                </div>
+                <!-- Right Half with an Image -->
+                <div class="w-1/2">
+                    <img :src="images['homeImage']" alt="Image" class="image w-full rounded-b-lg" />
+                </div>
             </div>
-            <!-- Right Half with an Image -->
-            <div class="w-1/2">
-                <img :src="images['homeImage']" alt="Image" class="image w-full rounded-b-lg" />
-            </div>
-        </div>
 
-        <div class="sets-container p-5">
-            <div class="flex items-center justify-around">
-                <div :class="['rounded-lg text-left', { active: activeSetIndex === 0 }]">
-                    <CarouselRow :items="items" class="cards-row" @sub-option-selected="handleRouterLinkClick" />
+            <div class="sets-container p-5">
+                <div class="flex items-center justify-around">
+                    <div :class="['rounded-lg text-left', { active: activeSetIndex === 0 }]">
+                        <CarouselRow :items="items" class="cards-row" @sub-option-selected="handleRouterLinkClick" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,9 +60,9 @@ export default {
 
             items:
                 [
-                    { icon: 'rentCar',title: 'Rent a car!', route: 'rentcar', id: 1, description: 'Rent a car, shift gears to adventure, and drive your vacation dreams into reality!' },
-                    { icon: 'bookings',title: 'View Bookings!',route: 'bookings' , id: 2, description: 'View and manage your bookings effortlessly. Take control of your travel plans.' },
-                    { icon: 'contactUs',title: 'Contact us!',route: 'contactus' , id: 3, description: 'Have questions or need assistance? Reach out to our support team through our Contact Us page' }
+                    { icon: 'rentCar', title: 'Rent a car!', route: 'rentcar', id: 1, description: 'Rent a car, shift gears to adventure, and drive your vacation dreams into reality!' },
+                    { icon: 'bookings', title: 'View Bookings!', route: 'bookings', id: 2, description: 'View and manage your bookings effortlessly. Take control of your travel plans.' },
+                    { icon: 'contactUs', title: 'Contact us!', route: 'contactus', id: 3, description: 'Have questions or need assistance? Reach out to our support team through our Contact Us page' }
                 ]
         };
     },

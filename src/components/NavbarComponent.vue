@@ -3,7 +3,7 @@
     <img :src="require('@/assets/img/logo.svg')" alt="" class="inline-block mr-1" style="height: 50px;" />
 
     <!-- Links -->
-    <div class="w-1/5 flex items-center justify-end">
+    <div class="w-1/4 flex items-center justify-end">
       <!-- Home logo -->
       <router-link :to="getHomeRoute" class="flex items-center text-white group relative">
         <img :src="icons['homeIcon']" alt="" class="inline-block mr-1 h-3" />

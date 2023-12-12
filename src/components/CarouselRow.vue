@@ -45,6 +45,21 @@
       </div>
     </router-link>
 
+    <router-link v-ripple v-if="items[3]" :to="items[3].route" @click="handleRouterLinkClick(items[1].id)"
+      class="yield-card card hover:shadow-2xl w-1/2 py-5 px-5 flex-col">
+      <div class="text-left flex items-center justify-between" style="height: 20%;">
+        <div class="flex items-center">
+          <img :src="icons[items[3].icon]" alt="" class="inline h-9 m-1">
+          <span class="font-bold text-lg">{{ items[3].title }}</span>
+        </div>
+        <img v-if="!items[3].id" :src="icons['clockIconRed']" alt="" class="inline mr-1 h-4">
+      </div>
+      <div class="items-end mt-5" style="height: 50%;">
+        <span>{{ items[3].description }}</span>
+        <img v-if="items[3].id" :src="icons['purpleArrowIcon']" alt="" class="inline m-2">
+      </div>
+    </router-link>
+
   </div>
 </template>
 

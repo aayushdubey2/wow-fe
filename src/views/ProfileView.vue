@@ -1,9 +1,10 @@
 <template>
-    <NavbarComponent />
+    <div class="h-screen">
+        <NavbarComponent />
     <div class="w-1/2 mx-auto mt-20 border-2 rounded-lg p-10 profile">
         <div class="flex items-center text-left">
             <!-- Display user image in a circle -->
-            <div class="h-25 rounded-full overflow-hidden">
+            <div class="h-25 w-50 rounded-full overflow-hidden">
                 <img :src="userImageSource" alt="User Image" class="w-full h-full object-cover inline">
             </div>
 
@@ -31,6 +32,7 @@
         <p>Insurance Company: {{ user.InsuranceCompanyName }}</p>
         <p>Insurance Policy Number: {{ user.InsurancePolicyNumber }}</p>
       </div>
+    </div>
     </div>
     </div>
 </template>

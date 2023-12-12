@@ -1,4 +1,5 @@
 <template>
+    <div class="h-screen">
     <NavbarComponent />
     <div class="split-container px-10">
         <!-- First Horizontal Split -->
@@ -32,6 +33,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
   
 <script>
@@ -58,8 +60,9 @@ export default {
             items:
                 [
                     {icon: 'manageBookings', title: 'Manage Bookings',route: 'bookings', id: 1, description: 'View and manage all bookings effortlessly.' },
-                    {icon: 'addCar', title: 'Add Cars & Classes',route: 'carorclass', id: 2, description: 'Add a new car to the inventory or introduce a new class of cars.' },
-                    {icon: 'addLocation', title: 'Add Location',route: 'addlocation', id: 3, description: 'Expanding? Add a new branch of your company.' }
+                    {icon: 'addCar', title: 'Add Cars', route: 'carorclass', id: 2, description: 'Add a new car to the inventory or introduce a new class of cars.' },
+                    {icon: 'addLocation', title: 'Add Location', route: 'addlocation', id: 3, description: 'Expanding? Add a new branch of your company.' },
+                    {icon: 'rentCar', title: 'View All Cars', route: 'cars', id: 3, description: 'View and manage all your renatl cars at one place' }
                 ]
         };
     },

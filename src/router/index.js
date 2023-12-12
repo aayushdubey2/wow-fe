@@ -57,6 +57,14 @@ const routes = [
     }
   },
   {
+    path: "/cars",
+    name: "cars",
+    component: CarCatalogue,
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
     path: "/contactus",
     name: "contactus",
     component: RentalLocationsView,

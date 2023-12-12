@@ -26,9 +26,15 @@
       </div>
     </div>
 
-    <div class="w-1/2 h-screen relative flex justify-center items-center">
-      <img :src="require('@/assets/img/sso.jpg')" alt="Image" class="w-full h-screen object-cover" />
+    <div class="w-1/2 h-screen relative">
+    <img :src="require('@/assets/img/rental.jpg')" alt="Image" class="w-full h-screen object-cover" />
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="text-white text-center">
+        <h1 class="text-5xl font-bold mb-4">WOW</h1>
+        <p class="text-xl font-bold">Your Journey, Your Car, Your Way</p>
+      </div>
     </div>
+  </div>
   </div>
 </template>
 

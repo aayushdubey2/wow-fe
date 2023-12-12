@@ -1,10 +1,12 @@
 <template>
-    <NavbarComponent class="fixed top-0 left-0 right-0 z-10 h-15" />
-    <div class="container mx-auto mt-20 p-4">
+    <div class="h-screen">
+      <NavbarComponent />
+    <div class="p-4 overflow-auto h-80" style="height: 87vh;">
       <div v-if="bookings.length === 0" class="text-gray-600">No bookings available.</div>
       <div v-else>
         <booking v-for="booking in bookings" :key="booking.id" :booking="booking" @update-bookings="getAllBookings"/>
       </div>
+    </div>
     </div>
   </template>
   
